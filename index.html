@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Visualisation</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Math Visualisation</h1>
+        
+        <form method="POST" action="/">
+            <div class="form-group">
+                <label for="x_start">X Start (Degrees):</label>
+                <input type="number" id="x_start" name="x_start" step="any" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="x_end">X End (Degrees):</label>
+                <input type="number" id="x_end" name="x_end" step="any" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="y_start">Y Start:</label>
+                <input type="number" id="y_start" name="y_start" step="any">
+            </div>
+            
+            <div class="form-group">
+                <label for="y_end">Y End:</label>
+                <input type="number" id="y_end" name="y_end" step="any">
+            </div>
+            
+            <div class="form-group">
+                <label for="function">Function:</label>
+                <select id="function" name="function" required>
+                    <option value="sine">Sine</option>
+                    <option value="cosine">Cosine</option>
+                    <option value="tangent">Tangent</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Generate Plot">
+            </div>
+        </form>
+        
+        {% if graph %}
+        <div class="graph-container">
+            <img src="data:image/png;base64,{{ graph }}" alt="Generated Plot">
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

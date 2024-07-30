@@ -1,0 +1,7 @@
+Flask
+plotly
+numpy
+oct2py
+Flask
+matplotlib
+numpy
