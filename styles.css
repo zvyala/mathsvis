@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #FAFBF8;
     margin: 0;
     padding: 0;
 }
@@ -41,7 +41,7 @@ input[type="submit"] {
     width: 100%;
     padding: 0.7rem;
     border: none;
-    background: #007bff;
+    background: #ffb3fb;
     color: white;
     font-size: 1rem;
     cursor: pointer;
@@ -49,7 +49,7 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background: #0056b3;
+    background: #e08ddc; 
 }
 
 .graph-container {
