@@ -1,14 +1,11 @@
-# visualisations.py
 import plotly.graph_objs as go
 import numpy as np
 
 def create_plot(x, y, y_start, y_end, unit):
     fig = go.Figure(data=go.Scatter(x=x, y=y, mode='lines', name='Function Graph'))
-
-    # Handle x-axis tick labels based on the unit
     if unit == 'degrees':
-        x_ticks = np.degrees(np.linspace(min(x), max(x), num=5))
-        x_tickvals = np.radians(x_ticks)
+        x_ticks = np.linspace(min(x), max(x), num=5)
+        x_tickvals = x_ticks
     else:
         x_ticks = np.linspace(min(x), max(x), num=5)
         x_tickvals = x_ticks
