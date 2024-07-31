@@ -1,9 +1,5 @@
 from flask import Flask, render_template, request
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
-import io
-import base64
+from visualisations import create_plot
 import numpy as np
 
 app = Flask(__name__)
@@ -15,30 +11,20 @@ def index():
         try:
             x_start = float(request.form['x_start'])
             x_end = float(request.form['x_end'])
-            y_start = float(request.form.get('y_start', -10))
-            y_end = float(request.form.get('y_end', 10))
+            y_start = float(request.form.get('y_start', -1))
+            y_end = float(request.form.get('y_end', 1))
             function = request.form['function']
-
-            x = np.linspace(np.deg2rad(x_start), np.deg2rad(x_end), 1000)
+            x_values = np.linspace(x_start, x_end, 1000)
+            x_rad = np.radians(x_values)  
             if function == 'sine':
-                y = np.sin(x)
+                y_values = np.sin(x_rad)
             elif function == 'cosine':
-                y = np.cos(x)
+                y_values = np.cos(x_rad)
             elif function == 'tangent':
-                y = np.tan(x)
-                y = np.clip(y, y_start, y_end)
-
-            fig, ax = plt.subplots()
-            ax.plot(np.rad2deg(x), y)
-            ax.set_xlabel('X (Degrees)')
-            ax.set_ylabel('Y')
-            ax.set_title(f'{function.capitalize()} Function')
-
-            img = io.BytesIO()
-            plt.savefig(img, format='png')
-            img.seek(0)
-            graph = base64.b64encode(img.getvalue()).decode('utf8')
-            plt.close()
+                y_values = np.tan(x_rad)
+            if function == 'tangent':
+                y_values = np.where(np.abs(y_values) > 10, np.nan, y_values)
+            graph = create_plot(x_values, y_values, y_start, y_end, 'degrees')
         except Exception as e:
             print(f"Error: {e}")
 
